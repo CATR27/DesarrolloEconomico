@@ -1,103 +1,115 @@
-import Image from "next/image";
+"use client";
+
+import { useState, useEffect } from "react";
+import { FaShoppingBag, FaHotel, FaUtensils, FaMapMarkedAlt, FaLandmark } from "react-icons/fa";
+import styles from "../pages/css/estilosHome/Dashboard.module.css"; // Ajusta la ruta si es distinto
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [darkMode, setDarkMode] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      const root = document.documentElement;
+      if (!root) return;
+      if (darkMode) {
+        root.classList.add("dark");
+      } else {
+        root.classList.remove("dark");
+      }
+    }
+  }, [darkMode]);
+
+  return (
+    <div className={styles.dashboardContainer}>
+      {/* Tarjeta alargada (header card) */}
+      <header className={styles.headerCard}>
+        <h1>Proyecto Desarrollo Económico</h1>
+        <p>SELECCIONA UNA OPCIÓN PARA COMENZAR</p>
+        {/* Switch para modo oscuro */}
+        <div className={styles.switchContainer}>
+          <label htmlFor="switch" className="switch">
+            <input
+              id="switch"
+              type="checkbox"
+              checked={darkMode}
+              onChange={() => setDarkMode(!darkMode)}
             />
-            Deploy RAIKKNOWWWWW 222222
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <span className="slider"></span>
+            <span className="decoration"></span>
+          </label>
+        </div>
+      </header>
+
+      {/* Contenido principal con tarjetas */}
+      <main className={styles.mainContent}>
+        <div className={styles.cardsContainer}>
+          {/* Tarjeta 1: Consume Local */}
+          <div className={`${styles.card} ${styles.cardBlue}`}>
+            <span className={styles.cardNumber}>1</span>
+            <div className={styles.iconWrapper}>
+              <FaShoppingBag className={styles.cardIcon} size={100} />
+            </div>
+            <div className={styles.cardContent}>
+              <h3>Consume Local</h3>
+              <p>Consume productos locales de San Juan</p>
+            </div>
+          </div>
+
+          {/* Tarjeta 2: Hoteles */}
+          <div className={`${styles.card} ${styles.cardPink}`}>
+            <span className={styles.cardNumber}>2</span>
+            <div className={styles.iconWrapper}>
+              <FaHotel className={styles.cardIcon} size={100} />
+            </div>
+            <div className={styles.cardContent}>
+              <h3>Hoteles San Juan del Río</h3>
+              <p>
+                Descubre la variedad de hoteles que San Juan del Río tiene para ti
+              </p>
+            </div>
+          </div>
+
+          {/* Tarjeta 3: Restaurantes */}
+          <div className={`${styles.card} ${styles.cardYellow}`}>
+            <span className={styles.cardNumber}>3</span>
+            <div className={styles.iconWrapper}>
+              <FaUtensils className={styles.cardIcon} size={100} />
+            </div>
+            <div className={styles.cardContent}>
+              <h3>Restaurantes San Juan del Río</h3>
+              <p>
+                Descubre la variedad de restaurantes que San Juan del Río tiene para ti
+              </p>
+            </div>
+          </div>
+
+          {/* Tarjeta 4: ¿Qué hacer? */}
+          <div className={`${styles.card} ${styles.cardPurple}`}>
+            <span className={styles.cardNumber}>4</span>
+            <div className={styles.iconWrapper}>
+              <FaMapMarkedAlt className={styles.cardIcon} size={100} />
+            </div>
+            <div className={styles.cardContent}>
+              <h3>¿Qué hacer en San Juan del Río?</h3>
+              <p>
+                Descubre una gran variedad de actividades y monumentos en San Juan del Río
+              </p>
+            </div>
+          </div>
+
+          {/* Tarjeta 5: Origen */}
+          <div className={`${styles.card} ${styles.cardGreen}`}>
+            <span className={styles.cardNumber}>5</span>
+            <div className={styles.iconWrapper}>
+              <FaLandmark className={styles.cardIcon} size={100} />
+            </div>
+            <div className={styles.cardContent}>
+              <h3>Origen San Juan</h3>
+              <p>Descripción por definir</p>
+            </div>
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
