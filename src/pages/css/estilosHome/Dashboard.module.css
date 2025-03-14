@@ -1,229 +1,337 @@
 /* Contenedor general */
-.dashboardContainer {
-    min-height: 100vh;
-    padding: 2rem;
-    background-color: #fdfdfd;
-    color: #333;
-    transition: background-color 0.3s ease, color 0.3s ease;
+.carouselContainer {
+  min-height: 100vh;
+  padding: 2rem;
+  color: #333;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+:global(.dark) .carouselContainer {
+  color: #f0f0f0;
+}
+
+/* Header */
+.headerArea {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.headerArea h1 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+.headerArea p {
+  font-size: 1rem;
+  color: #777;
+}
+:global(.dark) .headerArea p {
+  color: #bbb;
+}
+
+/* Switch Container */
+.switchContainer {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* Título del carrusel */
+.carouselTitle {
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* Contenedor del carrusel */
+.carouselTrackContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Botones de navegación */
+.navButton {
+  background: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  cursor: pointer;
+  margin: 0 1rem;
+  font-size: 1.5rem;
+  z-index: 50; /* Para que queden encima de la tarjeta */
+  transition: opacity 0.3s ease;
+}
+.navButton:hover {
+  opacity: 0.8;
+}
+:global(.dark) .navButton {
+  background: #444;
+  color: #fff;
+}
+
+/* Track */
+.carouselTrack {
+  position: relative;
+  width: 100%;
+  height: 520px; /* Altura base de las tarjetas */
+  overflow: visible;
+  margin: 0 1rem;
+}
+
+/* Tarjeta grande */
+.bigCard {
+  position: absolute;
+  width: 320px;
+  height: 460px;
+  border-radius: 1rem;
+  color: #fff;
+  text-align: center;
+  padding: 0;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Para respetar el borde redondeado */
+}
+
+/* Animación de inclinación para la tarjeta central */
+.centerCardAnimation {
+  width: 100%;
+  height: 100%;
+  animation: floatCard 4s ease-in-out infinite;
+}
+
+@keyframes floatCard {
+  0% {
+    transform: none;
   }
-  :global(.dark) .dashboardContainer {
-    background-color: #1a1a1a;
-    color: #f0f0f0;
+  50% {
+    transform: translateY(-5px) rotate(1deg);
   }
-  
-  /* Tarjeta alargada (header card) */
-  .headerCard {
-    background-color: #fff;
-    border-radius: 1.5rem;
-    padding: 2rem;
-    margin-bottom: 2rem;
-    text-align: center;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  100% {
+    transform: none;
   }
-  :global(.dark) .headerCard {
-    background-color: #2a2a2a;
-    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.1);
+}
+
+/* Encabezado de la tarjeta (imagen) */
+.cardHeader {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardImage {
+  object-fit: contain;
+  width: 160px;
+  height: 172px;
+  border-radius: 9px;
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.491));
+  border: 2px solid transparent;
+}
+
+/* Contenedor con borde redondeado para el contenido (texto + botón) */
+.contentContainer {
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(6px);
+  border-radius: 3rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 255px;
+}
+
+/* Contenido textual en medio */
+.cardBody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* Pie de la tarjeta (botón abajo) */
+.cardFooter {
+  padding: 1rem;
+}
+
+/* Título, subtítulo y texto extra */
+.bigCardTitle {
+  font-size: 1.2rem;
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+}
+.bigCardSubtitle {
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+}
+.bigCardExtra {
+  font-size: 0.85rem;
+  line-height: 1.3;
+  margin-top: 0.5rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Botón con profundidad */
+.startButton {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 9999px;
+  border: none;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.startButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+}
+
+/* Gradientes de tarjetas (colores) */
+.cardBlue {
+  background: linear-gradient(135deg, #3b82f6, #60a5fa);
+}
+.cardPink {
+  background: linear-gradient(135deg, #f43f5e, #ec4899);
+}
+.cardYellow {
+  background: linear-gradient(135deg, #f59e0b, #fbbf24);
+}
+.cardPurple {
+  background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+}
+.cardGreen {
+  background: linear-gradient(135deg, #10b981, #34d399);
+}
+
+/* ==================== Breakpoints ==================== */
+
+/* Pantallas medianas (hasta 992px) */
+@media (max-width: 992px) {
+  .bigCard {
+    width: 300px;
+    height: 440px;
   }
-  .headerCard h1 {
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
+  .carouselTrack {
+    height: 500px;
   }
-  .headerCard p {
-    font-size: 1rem;
-    color: #777;
+  .cardImage {
+    width: 140px;
+    height: 150px;
   }
-  :global(.dark) .headerCard p {
-    color: #bbb;
+  .bigCardTitle {
+    font-size: 1.15rem;
   }
-  
-  /* Contenedor del switch */
-  .switchContainer {
-    margin-top: 1rem;
-    display: flex;
-    justify-content: center;
-  }
-  
-  /* Switch (anidado en .switchContainer) */
-  .switchContainer :global(.switch) {
-    font-size: 17px;
-    position: relative;
-    display: inline-block;
-    width: 3.5em;
-    height: 2em;
-    cursor: pointer;
-  }
-  .switchContainer :global(.switch input) {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-  .switchContainer :global(.slider) {
-    --background: #20262c;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: var(--background);
-    transition: 0.5s;
-    border-radius: 30px;
-  }
-  .switchContainer :global(.slider:before) {
-    position: absolute;
-    content: "";
-    height: 1.4em;
-    width: 1.4em;
-    border-radius: 50%;
-    left: 10%;
-    bottom: 15%;
-    box-shadow: inset 8px -4px 0px 0px #ececd9, -4px 1px 4px 0px #dadada;
-    background: var(--background);
-    transition: 0.5s;
-  }
-  .switchContainer :global(.decoration) {
-    position: absolute;
-    content: "";
-    height: 2px;
-    width: 2px;
-    border-radius: 50%;
-    right: 20%;
-    top: 15%;
-    background: #e5f041e6;
-    backdrop-filter: blur(10px);
-    transition: all 0.5s;
-    box-shadow: -7px 10px 0 #e5f041e6, 8px 15px 0 #e5f041e6,
-      -17px 1px 0 #e5f041e6, -20px 10px 0 #e5f041e6, -7px 23px 0 #e5f041e6,
-      -15px 25px 0 #e5f041e6;
-  }
-  .switchContainer :global(.switch input:checked ~ .decoration) {
-    transform: translateX(-20px);
-    width: 10px;
-    height: 10px;
-    background: white;
-    box-shadow: -12px 0 0 white, -6px 0 0 1.6px white, 5px 15px 0 1px white,
-      1px 17px 0 white, 10px 17px 0 white;
-  }
-  .switchContainer :global(.switch input:checked + .slider) {
-    background-color: #5494de;
-  }
-  .switchContainer :global(.switch input:checked + .slider:before) {
-    transform: translateX(100%);
-    box-shadow: inset 15px -4px 0px 15px #efdf2b, 0 0 10px 0px #efdf2b;
-  }
-  
-  /* Contenido principal */
-  .mainContent {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  /* Grid de tarjetas */
-  .cardsContainer {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
-  }
-  
-  /* Tarjeta base */
-  .card {
-    position: relative;
-    border-radius: 1.5rem;
-    padding: 1.5rem;
-    color: #fff;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    animation: fadeInUp 0.5s ease-out;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    height: 200px;
-  }
-  .card:hover {
-    transform: translateY(-5px);
-  }
-  /* Box-shadow según el color de la tarjeta en hover */
-  .cardBlue:hover {
-    box-shadow: 0 0 24px rgba(96, 165, 250, 0.5);
-  }
-  .cardPink:hover {
-    box-shadow: 0 0 24px rgba(236, 72, 153, 0.5);
-  }
-  .cardYellow:hover {
-    box-shadow: 0 0 24px rgba(251, 191, 36, 0.5);
-  }
-  .cardPurple:hover {
-    box-shadow: 0 0 24px rgba(167, 139, 250, 0.5);
-  }
-  .cardGreen:hover {
-    box-shadow: 0 0 24px rgba(52, 211, 153, 0.5);
-  }
-  
-  /* Número en la tarjeta */
-  .cardNumber {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    font-size: 2rem;
-    font-weight: bold;
-    opacity: 0.15;
-  }
-  
-  /* Icono en la esquina superior izquierda */
-  .iconWrapper {
-    position: absolute;
-    top: 0.5rem;
-    left: 0.5rem;
-    z-index: 0;
-  }
-  .cardIcon {
-    opacity: 0.8;
-    transition: transform 0.4s ease;
-  }
-  .card:hover .cardIcon {
-    transform: perspective(600px) rotateY(10deg) scale(1.05);
-  }
-  
-  /* Contenido (texto) en primer plano */
-  .cardContent {
-    position: relative;
-    z-index: 1;
-    margin-top: auto;
-  }
-  .cardContent h3 {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-  }
-  .cardContent p {
+  .bigCardSubtitle {
     font-size: 0.95rem;
   }
-  
-  /* Gradientes de tarjetas */
-  .cardBlue {
-    background: linear-gradient(135deg, #3b82f6, #60a5fa);
+  .bigCardExtra {
+    font-size: 0.8rem;
   }
-  .cardPink {
-    background: linear-gradient(135deg, #f43f5e, #ec4899);
+}
+
+/* Pantallas pequeñas (hasta 768px) */
+@media (max-width: 768px) {
+  /* Mantén visibles las flechas en móvil y posiciónalas */
+  .navButton {
+    position: absolute;
+    top: 0.5rem;
+    transform: none;
+    margin: 0; /* Quita el margin lateral para que no descuadre */
   }
-  .cardYellow {
-    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+  /* Primera flecha (prev) a la izquierda */
+  .navButton:first-of-type {
+    left: 0.5rem;
   }
-  .cardPurple {
-    background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+  /* Segunda flecha (next) a la derecha */
+  .navButton:last-of-type {
+    right: 0.5rem;
   }
-  .cardGreen {
-    background: linear-gradient(135deg, #10b981, #34d399);
+
+  .carouselTrack {
+    height: 420px;
   }
-  
-  /* Animación de entrada */
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(15px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .bigCard {
+    width: 280px;
+    height: 420px;
   }
-  
+
+  /* Imagen más grande en móvil */
+  .cardHeader {
+    padding: 0.5rem;
+  }
+  .cardImage {
+    width: 180px !important;
+    height: 180px !important;
+  }
+
+  /* Reduce los paddings para juntar más texto y botón */
+  .cardBody {
+    padding: 0.5rem;
+  }
+  .cardFooter {
+    padding: 0.5rem;
+  }
+
+  .bigCardTitle {
+    font-size: 1.1rem;
+  }
+  .bigCardSubtitle {
+    font-size: 0.9rem;
+  }
+  .bigCardExtra {
+    font-size: 0.75rem;
+  }
+
+  .contentContainer {
+    height: 200px; /* Ajusta según necesites */
+  }
+}
+
+/* Pantallas muy pequeñas (hasta 480px) */
+@media (max-width: 480px) {
+  .contentContainer {
+    height: 180px; /* Ajusta según necesites */
+  }
+
+  .carouselContainer {
+    padding: 1rem;
+  }
+  .headerArea h1 {
+    font-size: 1.5rem;
+  }
+  .headerArea p,
+  .carouselTitle {
+    font-size: 1rem;
+  }
+  .bigCard {
+    width: 260px;
+    height: 400px;
+  }
+
+  /* Imagen aún más grande en pantallas muy pequeñas */
+  .cardImage {
+    width: 200px !important;
+    height: 200px !important;
+  }
+
+  .bigCardTitle {
+    font-size: 1rem;
+  }
+  .bigCardSubtitle {
+    font-size: 0.85rem;
+  }
+  .bigCardExtra {
+    font-size: 0.7rem;
+  }
+}
