@@ -1,0 +1,191 @@
+/* Switch día/noche en esquina inferior izquierda */
+.dayNightToggle {
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 9999;
+    transition: transform 0.3s;
+  }
+  .dayNightToggle:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Contenedor del carrusel */
+  .carruselContainer {
+    width: 100%;
+    max-width: 1300px;
+    margin: 5rem auto; /* Menor separación con el banner */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding-top: 20px;
+  }
+  
+  /* Flechas de navegación */
+  .arrowBtn {
+    background: none;
+    border: none;
+    font-size: 2.5rem;
+    color: #666;
+    cursor: pointer;
+    margin: 0 1.5rem;
+    transition: color 0.3s;
+    z-index: 10;
+  }
+  .arrowBtn:hover {
+    color: #333;
+  }
+  
+  /* Contenedor principal de tarjetas */
+  .cardsWrapper {
+    position: relative;
+    width: 100%;
+    height: 600px; /* Altura para mostrar la tarjeta central */
+    overflow: visible;
+    /* La transición se aplica cuando cambian las clases de las tarjetas */
+  }
+  
+  /* Tarjeta base */
+  .card {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 350px;  /* Ancho de la tarjeta */
+    height: 80%;   /* Alto de la tarjeta */
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    color: #fff;
+    text-align: center;
+    /* Transición en transform, box-shadow y opacity */
+    transition: transform 0.6s ease, box-shadow 0.3s, opacity 0.6s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Posiciones de las tarjetas */
+  .leftCard {
+    transform: translateX(-150%) scale(0.8);
+    opacity: 0.9;
+  }
+  .centerCard {
+    transform: translate(-50%, -20px) scale(1.3);
+    z-index: 2;
+    animation: float 3s ease-in-out infinite alternate;
+  }
+  .rightCard {
+    transform: translateX(50%) scale(0.8);
+    opacity: 0.9;
+  }
+  
+  /* Ocultas el resto de tarjetas */
+  .hiddenCard {
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, 200px) scale(0.5);
+    z-index: 0;
+  }
+  
+  /* Animación flotante de la tarjeta central */
+  @keyframes float {
+    0% {
+      transform: translate(-50%, -20px) scale(1.3);
+    }
+    100% {
+      transform: translate(-50%, -30px) scale(1.3);
+    }
+  }
+  
+  /* Imagen */
+  .cardImage {
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
+    margin: 1rem auto;
+  }
+  
+  /* Contenedor overlay (blanco con blur y opacidad baja) */
+  .overlay {
+    margin-top: auto;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 70px;
+    padding: 1rem;
+    width: 105%;
+    margin-bottom: 2rem;
+  }
+  
+  /* Texto dentro del overlay */
+  .cardTitle {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  .cardSubtitle {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+  .cardText {
+    font-size: 1rem;
+    margin: 0 1rem 1rem;
+  }
+  .cardButton {
+    background: #fff;
+    color: #333;
+    border: none;
+    border-radius: 20px;
+    padding: 0.6rem 1.4rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+  }
+  .cardButton:hover {
+    background: #f2f2f2;
+  }
+  
+  /* Gradientes para cada tarjeta */
+  .cardBlue {
+    background: linear-gradient(135deg, #3B82F6, #60A5FA);
+  }
+  .cardPink {
+    background: linear-gradient(135deg, #EC4899, #F472B6);
+  }
+  .cardYellow {
+    background: linear-gradient(135deg, #FBBF24, #FCD34D);
+  }
+  .cardPurple {
+    background: linear-gradient(135deg, #A78BFA, #C4B5FD);
+  }
+  .cardGreen {
+    background: linear-gradient(135deg, #34D399, #6EE7B7);
+  }
+  
+  /* Responsivo: solo la tarjeta central en móvil */
+  @media (max-width: 768px) {
+    .cardsWrapper {
+      height: 450px;
+    }
+    .card {
+      width: 300px;
+      height: 100%;
+    }
+    .leftCard,
+    .rightCard {
+      display: none; /* Solo mostramos la central en móvil */
+    }
+    .centerCard {
+      transform: translate(-50%, -10px) scale(1.15);
+      animation: none;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+    .overlay {
+      width: 90%;
+    }
+  }
+  

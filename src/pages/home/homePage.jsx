@@ -1,32 +1,15 @@
-"use client";
-
 import React, { useState, useEffect } from 'react';
-import styles from '../pages/css/estilosHome/estilosHomePage.module.css';
-import Carrusel from '../pages/home/components/Carrusel';
+import styles from '../css/estilosHome/estilosHomePage.module.css';
+import Carrusel from './components/Carrusel';
 
-interface WeatherData {
-  main: {
-    temp: number;
-    feels_like: number;
-    humidity: number;
-  };
-  weather: {
-    icon: string;
-    description: string;
-  }[];
-  wind: {
-    speed: number;
-  };
-}
-
-const Home: React.FC = () => {
-  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
+export default function Home() {
+  const [weatherData, setWeatherData] = useState(null);
   // Estado para el color central de la tarjeta (para la gradiente)
-  const [centralColor, setCentralColor] = useState<string>("#3B82F6");
-  // Estado para el modo día/noche
-  const [isDay, setIsDay] = useState<boolean>(true);
+  const [centralColor, setCentralColor] = useState("#3B82F6");
+  // Estado para el modo día/noche (elevado para compartirlo)
+  const [isDay, setIsDay] = useState(true);
 
-  const getWeather = async (): Promise<WeatherData | null> => {
+  const getWeather = async () => {
     const city = 'San Juan del Rio';
     const apiKey = 'f640122a0aaad164205b3f68eeb88223';
     const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
@@ -37,7 +20,7 @@ const Home: React.FC = () => {
       if (!response.ok) {
         throw new Error('Error al obtener los datos del clima');
       }
-      const data: WeatherData = await response.json();
+      const data = await response.json();
       return data;
     } catch (error) {
       console.error(error);
@@ -53,7 +36,7 @@ const Home: React.FC = () => {
     fetchData();
   }, []);
 
-  const getFormattedDate = (): string => {
+  const getFormattedDate = () => {
     const now = new Date();
     const days = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
     const months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
@@ -82,7 +65,7 @@ const Home: React.FC = () => {
 
   return (
     <>
-      {/* Banner con fondo dinámico según la tarjeta central y modo (blanco en día, negro en oscuro) */}
+      {/* Banner con fondo dinámico según la tarjeta central y modo (modo: blanco en día, negro en oscuro) */}
       <section
         className={styles.banner}
         style={{
@@ -121,13 +104,11 @@ const Home: React.FC = () => {
       </section>
 
       {/* Se pasa isDay, setIsDay y setCentralColor para que el carrusel comparta y actualice el modo y el color central */}
-      <Carrusel
-        setCentralColor={setCentralColor}
-        isDay={isDay}
+      <Carrusel 
+        setCentralColor={setCentralColor} 
+        isDay={isDay} 
         setIsDay={setIsDay}
       />
     </>
   );
-};
-
-export default Home;
+}

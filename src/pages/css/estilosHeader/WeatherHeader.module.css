@@ -1,0 +1,102 @@
+.weatherHeaderContainer {
+    /* Ocupa todo el ancho del header */
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+  
+    /* Fondo semitransparente con gradiente */
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0.1)
+    );
+    backdrop-filter: blur(10px);
+  
+    /* Bordes redondeados suaves (si lo deseas) */
+    border-radius: 1rem;
+  
+    /* Para texto claro en modo normal (ajusta en modo oscuro si prefieres) */
+    color: #fff;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Contenedor de la info del clima */
+  .weatherInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Fila con temperatura y descripción */
+  .tempRow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Texto de temperatura grande */
+  .temperature {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+  }
+  
+  /* Descripción del clima (ej. “lluvioso”, “despejado”) */
+  .description {
+    font-size: 1rem;
+    text-transform: capitalize;
+  }
+  
+  /* Ciudad y fecha/hora */
+  .cityDate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .cityName {
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+  }
+  
+  .fechaHora {
+    font-size: 0.9rem;
+    opacity: 0.9;
+  }
+  
+  /* Mensaje de error */
+  .errorMsg {
+    color: #ffdddd;
+    font-size: 1rem;
+  }
+  
+  /* Mensaje de carga */
+  .loading {
+    font-size: 1rem;
+    color: #eee;
+  }
+  
+  /* ===================== Responsivo ===================== */
+  @media (max-width: 768px) {
+    .weatherHeaderContainer {
+      padding: 0.5rem;
+    }
+    .temperature {
+      font-size: 2rem;
+    }
+    .description {
+      font-size: 0.95rem;
+    }
+    .cityName {
+      font-size: 1rem;
+    }
+    .fechaHora {
+      font-size: 0.8rem;
+    }
+  }
+  

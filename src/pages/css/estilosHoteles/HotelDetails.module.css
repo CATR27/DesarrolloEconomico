@@ -1,0 +1,190 @@
+/* Contenedor principal, centrado y no muy grande */
+.detailsContainer {
+  max-width: 900px; /* Menor que 1200px para hacerlo más chico */
+  margin: 2rem auto; /* Centrado horizontal */
+  background-color: #fff; /* Fondo blanco */
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.4s ease;
+  position: relative;
+  color: #333;
+}
+
+/* Encabezado */
+.detailsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.detailsTitle {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #333;
+}
+.detailsCloseButton {
+  background-color: #0070f3;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.detailsCloseButton:hover {
+  background-color: #005bb5;
+}
+
+/* Contenido en fila: Info + Fotos */
+.detailsContent {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap; /* Para que en pantallas pequeñas baje a otra fila */
+}
+
+/* Columna de información */
+.infoColumn {
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cada fila de detalle (etiqueta + texto) */
+.detailsItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  color: #444;
+  line-height: 1.4;
+  margin-bottom: 0.8rem; /* Espacio entre renglones */
+}
+
+/* Ícono a la izquierda (mapa, reloj, etc.) */
+.iconLeft {
+  color: #ff5e8e; /* color distintivo */
+  margin-top: 0.2rem;
+  font-size: 1.2rem;
+}
+
+/* Columna de fotos */
+.photosColumn {
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.additionalPhotosTitle {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+.photosGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: flex-start;
+}
+
+/* Cada foto */
+.photoWrapper {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s;
+  width: 130px;
+  height: 100px;
+}
+.photoWrapper:hover {
+  transform: scale(1.05);
+}
+.additionalPhoto {
+  object-fit: cover;
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Ícono de hover (zoom) */
+.hoverIcon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 1.2rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.photoWrapper:hover .hoverIcon {
+  opacity: 1;
+}
+
+/* Modal Overlay */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* Contenido del modal */
+.modalContent {
+  position: relative;
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 1rem;
+  max-width: 80%;
+  max-height: 80%;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.modalCloseButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  color: #333;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+/* Contenedor para la imagen grande */
+.modalImageWrapper {
+  position: relative;
+  width: 100%;
+  height: 400px; /* Ajusta la altura */
+  border-radius: 16px;
+  overflow: hidden;
+}
+.modalImage {
+  object-fit: contain;
+}
+
+/* Animación */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

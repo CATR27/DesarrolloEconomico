@@ -1,0 +1,242 @@
+/* Importa fuentes para estilos (Montserrat y Roboto) */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* CONTENEDOR PRINCIPAL DEL BANNER */
+.banner {
+  position: relative;
+  width: 100%;
+  min-height: 200px; 
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  color: #fff;
+  font-family: 'Pacifico', cursive;
+  padding: 1rem 0;
+}
+
+/* EFECTO WAVE */
+.banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -10%;
+  width: 120%;
+  height: 100%;
+  border-radius: 40% 60% 70% 30% / 30% 40% 60% 70%;
+  transform: rotate(5deg);
+  opacity: 0.5;
+  z-index: 1;
+  animation: wave 8s infinite ease-in-out;
+}
+.banner::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: -10%;
+  width: 120%;
+  height: 100%;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  border-radius: 50% 50% 0 0 / 60% 60% 0 0;
+  transform: rotate(-5deg);
+  opacity: 0.3;
+  z-index: 1;
+  animation: wave2 10s infinite ease-in-out alternate;
+}
+
+@keyframes wave {
+  0% { transform: translateX(0) rotate(5deg); }
+  25% { transform: translateX(-3%) rotate(0deg); }
+  50% { transform: translateX(0) rotate(-5deg); }
+  75% { transform: translateX(3%) rotate(0deg); }
+  100% { transform: translateX(0) rotate(5deg); }
+}
+@keyframes wave2 {
+  0% { transform: translateX(0) rotate(-5deg); }
+  50% { transform: translateX(-3%) rotate(0deg); }
+  100% { transform: translateX(0) rotate(-5deg); }
+}
+
+/* CONTENEDOR DE CONTENIDO DEL BANNER */
+.bannerContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* logo izq - texto medio - clima der */
+  width: 90%;
+  max-width: 1270px;
+  margin: 0 auto;
+  gap: 1rem; 
+}
+
+/* LOGO (IZQUIERDA) */
+.logoContainer {
+  display: flex;
+  align-items: center;
+}
+.logoImage {
+  /* Logo más grande */
+  max-height: 100px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* CONTENEDOR CENTRAL DEL TEXTO (MEDIO) */
+.centerText {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  /* No se aplica flex: 1; para no forzar igual ancho */
+}
+
+/* TEXTOS */
+.title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+/* TARJETA DE CLIMA (DERECHA) */
+.weatherCard {
+  display: flex;
+  flex-direction: row; 
+  align-items: center;
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  box-sizing: border-box;
+  color: #fff;
+  font-family: sans-serif;
+  max-height: 200px;
+}
+
+/* SECCIÓN IZQUIERDA DE LA TARJETA */
+.leftSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-right: 1rem;
+}
+.cityName {
+  font-size: 1.8rem;
+  margin: 0;
+}
+.date {
+  font-size: 1rem;
+  margin: 0;
+  opacity: 0.9;
+}
+.tempWrapper {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.temp {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.feelsLike {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+/* SECCIÓN DERECHA DE LA TARJETA */
+.rightSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  text-align: center;
+}
+.weatherIcon {
+  width: 80px;
+  height: 80px;
+}
+.description {
+  font-size: 1.2rem;
+  text-transform: capitalize;
+  margin: 0;
+}
+.details {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  opacity: 0.95;
+}
+
+@media (max-width: 768px) {
+    /* Banner más pequeño */
+    .banner {
+      min-height: 130px;
+      padding: 0.5rem 0;
+    }
+  
+    /* Distribuye secciones en la misma fila */
+    .bannerContent {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+  
+    /* Cada sección (logo, texto, clima) con el mismo ancho */
+    .logoContainer,
+    .centerText,
+    .weatherCard {
+      flex: none;        /* Evita que crezcan/encojan de forma diferente */
+      width: 30%;        /* Cada uno ~30%, quedando un 10% sobrante para gaps */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    /* Logo más pequeño */
+    .logoImage {
+      max-height: 40px;  /* Ajusta si deseas un logo un poco más grande */
+      width: auto;
+    }
+  
+    /* Oculta fecha, sensación, descripción y detalles */
+    .date,
+    .feelsLike,
+    .description,
+    .details {
+      display: none;
+    }
+  
+    /* Reduce fuentes del texto principal */
+    .title {
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+    }
+    .subtitle {
+      font-size: 0.7rem;
+      margin-bottom: 0.5rem;
+    }
+  
+    /* Ajusta la tarjeta de clima */
+    .weatherCard {
+      flex-direction: column; /* Nombre y temp uno debajo de otro */
+      padding: 0.6rem;
+      max-height: 90px;
+    }
+    .cityName {
+      font-size: 0.9rem;
+      margin: 0;
+    }
+    .temp {
+      font-size: 1.1rem;
+      margin: 0.2rem 0;
+    }
+    .weatherIcon {
+      width: 30px;
+      height: 30px;
+    }
+  }
+  

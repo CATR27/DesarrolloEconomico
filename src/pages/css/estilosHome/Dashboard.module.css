@@ -61,11 +61,11 @@
   border-radius: 50%;
   width: 3rem;
   height: 3rem;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   margin: 0 1rem;
   font-size: 1.5rem;
-  z-index: 50; /* Para que queden encima de la tarjeta */
+  z-index: 50; /* para que queden encima de la tarjeta */
   transition: opacity 0.3s ease;
 }
 .navButton:hover {
@@ -97,7 +97,7 @@
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* Para respetar el borde redondeado */
+  overflow: hidden;
 }
 
 /* Animación de inclinación para la tarjeta central */
@@ -107,17 +107,7 @@
   animation: floatCard 4s ease-in-out infinite;
 }
 
-@keyframes floatCard {
-  0% {
-    transform: none;
-  }
-  50% {
-    transform: translateY(-5px) rotate(1deg);
-  }
-  100% {
-    transform: none;
-  }
-}
+
 
 /* Encabezado de la tarjeta (imagen) */
 .cardHeader {
@@ -145,7 +135,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  height: 255px;
+  height: 237px;
 }
 
 /* Contenido textual en medio */
@@ -189,12 +179,12 @@
   color: #333;
   cursor: pointer;
   font-weight: 600;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .startButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* Gradientes de tarjetas (colores) */
@@ -292,18 +282,10 @@
   .bigCardExtra {
     font-size: 0.75rem;
   }
-
-  .contentContainer {
-    height: 200px; /* Ajusta según necesites */
-  }
 }
 
 /* Pantallas muy pequeñas (hasta 480px) */
 @media (max-width: 480px) {
-  .contentContainer {
-    height: 180px; /* Ajusta según necesites */
-  }
-
   .carouselContainer {
     padding: 1rem;
   }
@@ -334,4 +316,36 @@
   .bigCardExtra {
     font-size: 0.7rem;
   }
+}
+
+
+
+
+
+
+/* Banner redondeado con sombra inferior */
+.bannerHeader {
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 2rem;            /* separación con el carrusel */
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  background-color: #fff;         /* fondo en modo claro */
+  /* Sombra solo en la parte inferior (puedes ajustar valores a tu gusto) */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease;
+  text-align: center;            /* texto centrado */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 9rem; /* Ajusta el valor según prefieras */
+
+}
+
+/* Modo oscuro: fondo oscuro y sombra diferente */
+:global(.dark) .bannerHeader {
+  background-color: #333;
+  color: #f0f0f0;
+  /* Sombra en modo oscuro (opcional) */
+  box-shadow: 0 5px 10px rgba(255, 255, 255, 0.1);
 }
