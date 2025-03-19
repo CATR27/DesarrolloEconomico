@@ -5,14 +5,13 @@
 .banner {
   position: relative;
   width: 100%;
-  min-height: 200px; 
-  border-radius: 20px;
+  min-height: 200px;
+  border-radius: 54px;
   overflow: hidden;
   display: flex;
-  align-items: center; 
+  align-items: center;
   justify-content: center;
   color: #fff;
-  font-family: 'Pacifico', cursive;
   padding: 1rem 0;
 }
 
@@ -68,7 +67,7 @@
   width: 90%;
   max-width: 1270px;
   margin: 0 auto;
-  gap: 1rem; 
+  gap: 1rem;
 }
 
 /* LOGO (IZQUIERDA) */
@@ -77,7 +76,6 @@
   align-items: center;
 }
 .logoImage {
-  /* Logo más grande */
   max-height: 100px;
   width: auto;
   object-fit: contain;
@@ -88,7 +86,6 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  /* No se aplica flex: 1; para no forzar igual ancho */
 }
 
 /* TEXTOS */
@@ -104,7 +101,7 @@
 /* TARJETA DE CLIMA (DERECHA) */
 .weatherCard {
   display: flex;
-  flex-direction: row; 
+  flex-direction: row;
   align-items: center;
   border-radius: 20px;
   padding: 1.5rem;
@@ -170,73 +167,85 @@
   opacity: 0.95;
 }
 
+/* ===================== RESPONSIVO ===================== */
 @media (max-width: 768px) {
-    /* Banner más pequeño */
-    .banner {
-      min-height: 130px;
-      padding: 0.5rem 0;
-    }
-  
-    /* Distribuye secciones en la misma fila */
-    .bannerContent {
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.5rem;
-    }
-  
-    /* Cada sección (logo, texto, clima) con el mismo ancho */
-    .logoContainer,
-    .centerText,
-    .weatherCard {
-      flex: none;        /* Evita que crezcan/encojan de forma diferente */
-      width: 30%;        /* Cada uno ~30%, quedando un 10% sobrante para gaps */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  
-    /* Logo más pequeño */
-    .logoImage {
-      max-height: 40px;  /* Ajusta si deseas un logo un poco más grande */
-      width: auto;
-    }
-  
-    /* Oculta fecha, sensación, descripción y detalles */
-    .date,
-    .feelsLike,
-    .description,
-    .details {
-      display: none;
-    }
-  
-    /* Reduce fuentes del texto principal */
-    .title {
-      font-size: 0.9rem;
-      margin-bottom: 0.3rem;
-    }
-    .subtitle {
-      font-size: 0.7rem;
-      margin-bottom: 0.5rem;
-    }
-  
-    /* Ajusta la tarjeta de clima */
-    .weatherCard {
-      flex-direction: column; /* Nombre y temp uno debajo de otro */
-      padding: 0.6rem;
-      max-height: 90px;
-    }
-    .cityName {
-      font-size: 0.9rem;
-      margin: 0;
-    }
-    .temp {
-      font-size: 1.1rem;
-      margin: 0.2rem 0;
-    }
-    .weatherIcon {
-      width: 30px;
-      height: 30px;
-    }
+  /* Banner más pequeño */
+  .banner {
+    min-height: 130px;
+    padding: 0.5rem 0;
   }
-  
+
+  .bannerContent {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  /* Ajusta tamaños de cada sección para que no se sobrepongan */
+  .logoContainer,
+  .centerText,
+  .weatherCard {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Ajusta el ancho de cada bloque según tus necesidades */
+  .logoContainer {
+    width: 25%;
+  }
+  .centerText {
+    width: 35%;
+  }
+  .weatherCard {
+    width: 40%;
+    height: 103px;
+    flex-direction: row;
+    padding: 0.2rem;
+    max-height: 90px;
+    border-radius: 33px;
+  }
+
+  /* Logo más pequeño */
+  .logoImage {
+    max-height: 40px;
+    width: auto;
+  }
+
+  /* Oculta fecha, sensación, descripción y detalles para compactar */
+  .date,
+  .feelsLike,
+  .description,
+  .details {
+    display: none;
+  }
+
+  /* Ajusta fuentes del texto principal */
+  .title {
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+  }
+  .subtitle {
+    font-size: 0.7rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Ajusta la tarjeta de clima (sección izquierda/derecha) */
+  .leftSection {
+    margin-right: -1.5rem;
+  }
+  .cityName {
+    font-size: 0.9rem;
+    margin: 0;
+  }
+  .temp {
+    font-size: 1.2rem; /* Temperatura un poco más grande */
+    margin: 0;
+  }
+  .weatherIcon {
+    width: 35px; /* Ícono más pequeño */
+    height: 35px;
+  }
+}

@@ -1,10 +1,12 @@
+"use client";
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import styles from '../../css/estilosHome/stylesCarrusel.module.css';
 
 // Funciones para aclarar/oscurecer colores (opcionales)
 function lightenColor(hex, amount = 0.2) {
   let c = hex.replace(/^#/, '');
-  if (c.length === 3) c = c[0]+c[0]+c[1]+c[1]+c[2]+c[2];
+  if (c.length === 3) c = c[0] + c[0] + c[1] + c[1] + c[2] + c[2];
   const num = parseInt(c, 16);
   let r = (num >> 16) + Math.round(255 * amount);
   let g = ((num >> 8) & 0xff) + Math.round(255 * amount);
@@ -19,6 +21,8 @@ function darkenColor(hex, amount = 0.2) {
 }
 
 export default function Carrusel({ setCentralColor, isDay, setIsDay }) {
+  const router = useRouter();
+
   const data = [
     {
       id: 1,
@@ -101,21 +105,24 @@ export default function Carrusel({ setCentralColor, isDay, setIsDay }) {
   const centerIndex = currentIndex;
   const rightIndex = (currentIndex + 1) % total;
 
-  // Asigna la clase según la posición
+  // Asigna la clase según la posición con la siguiente lógica:
+  // - La tarjeta de la izquierda se posiciona a la izquierda con translateX(-150%)
+  // - La tarjeta central se centra con translateX(-50%) (esto compensa el left:50% del .card)
+  // - La tarjeta derecha se posiciona a la derecha con translateX(50%)
+  // - Las demás se ocultan
   const getPositionClass = (i) => {
     if (i === leftIndex) return styles.leftCard;
     if (i === centerIndex) return styles.centerCard;
     if (i === rightIndex) return styles.rightCard;
-    // El resto de tarjetas se ocultan
     return styles.hiddenCard;
   };
 
-  // Cada vez que cambia la tarjeta central, se actualiza el color en el padre
+  // Actualiza el color central en el componente padre
   useEffect(() => {
     setCentralColor(data[centerIndex].bgColor);
   }, [centerIndex, setCentralColor]);
 
-  // Degradado para el body (empieza en esquina inferior derecha)
+  // Degradado para el body (empieza en la esquina inferior derecha)
   const backgroundStyle = isDay
     ? `linear-gradient(to top left, #ffffff, ${data[centerIndex].bgColor})`
     : `linear-gradient(to top left, #000000, ${data[centerIndex].bgColor})`;
@@ -143,23 +150,31 @@ export default function Carrusel({ setCentralColor, isDay, setIsDay }) {
         </button>
 
         <div className={styles.cardsWrapper}>
-          {data.map((item, i) => {
-            return (
-              <div
-                key={item.id}
-                className={`${styles.card} ${item.gradientClass} ${getPositionClass(i)}`}
-                style={{ boxShadow: `0 10px 25px ${item.shadowColor}` }}
-              >
-                <img src={item.imgSrc} alt={item.title} className={styles.cardImage} />
-                <div className={styles.overlay}>
-                  <h2 className={styles.cardTitle}>{item.title}</h2>
-                  <h3 className={styles.cardSubtitle}>{item.subtitle}</h3>
-                  <p className={styles.cardText}>{item.extraText}</p>
-                  <button className={styles.cardButton}>Iniciar</button>
-                </div>
+          {data.map((item, i) => (
+            <div
+              key={item.id}
+              className={`${styles.card} ${item.gradientClass} ${getPositionClass(i)}`}
+              style={{ boxShadow: `0 10px 25px ${item.shadowColor}` }}
+            >
+              <img src={item.imgSrc} alt={item.title} className={styles.cardImage} />
+              <div className={styles.overlay}>
+                <h2 className={styles.cardTitle}>{item.title}</h2>
+                <h3 className={styles.cardSubtitle}>{item.subtitle}</h3>
+                <p className={styles.cardText}>{item.extraText}</p>
+                <button
+                  className={styles.cardButton}
+                  onClick={() => {
+                    // Si la tarjeta es de Hoteles, redirige a "/Hoteles/hoteles"
+                    if (item.title === "Hoteles") {
+                      router.push(item.link);
+                    }
+                  }}
+                >
+                  Iniciar
+                </button>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
 
         <button className={styles.arrowBtn} onClick={handleNext}>
